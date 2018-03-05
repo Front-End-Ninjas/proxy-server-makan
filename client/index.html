@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Proxy Server</title>
+</head>
+<body>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <div id="item-description-container">ITEM DESCRIPTION</div>
+  <div id="image-gallery-container">IMAGES</div>
+  <div id="similar-items-container">THUMBNAILS</div>
+  <div id="item-reviews-container">REVIEWs</div>
+  <script src="http://localhost:3000/app.bundle.js"></script>
+  <script src="http://localhost:3001/dist/bundle.js"></script>
+  <script src="http://localhost:3003/bundle.js"></script>
+  <script src="http://localhost:1337/bundle.js"></script>
+  <script>
+    // ReactDOM.render(
+    //   React.createElement(Image),
+    //   document.getElementById('image-gallery-container'),
+    // );
+
+    // ReactDOM.render(
+    //   React.createElement(Descriptions),
+    //   document.getElementById('item-description-container'),
+    // );
+
+    ReactDOM.render(
+      React.createElement(Similar),
+      document.getElementById('similar-items-container'),
+    );
+
+    // ReactDOM.render(
+    //   React.createElement(Review),
+    //   document.getElementById('item-reviews-container'),
+    // );
+    </script>
+</body>
+</html>
