@@ -1,0 +1,26 @@
+{
+  "name": "proxy-server-makan",
+  "version": "1.0.0",
+  "description": "proxy",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Front-End-Ninjas/proxy-server-makan.git"
+  },
+  "keywords": [
+    "nile"
+  ],
+  "author": "Makan Azarshahy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Front-End-Ninjas/proxy-server-makan/issues"
+  },
+  "homepage": "https://github.com/Front-End-Ninjas/proxy-server-makan#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "webpack": "^3.11.0"
+  }
+}
