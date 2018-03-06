@@ -2,6 +2,11 @@
 <html>
 <head>
   <title>Proxy Server</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="http://localhost:3001/style.css">
+  <link rel="stylesheet" type="text/css" href="http://localhost:3003/style.css">
+  <link rel="stylesheet" type="text/css" href="http://localhost:3000/style/styles.css">
+  <link rel="stylesheet" type="text/css" href="http://localhost:1337/index.css">
 </head>
 <body>
   <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
@@ -15,25 +20,25 @@
   <script src="http://localhost:3003/bundle.js"></script>
   <script src="http://localhost:1337/bundle.js"></script>
   <script>
-    // ReactDOM.render(
-    //   React.createElement(Image),
-    //   document.getElementById('image-gallery-container'),
-    // );
-
-    // ReactDOM.render(
-    //   React.createElement(Descriptions),
-    //   document.getElementById('item-description-container'),
-    // );
+    ReactDOM.render(
+      React.createElement(Image),
+      document.getElementById('image-gallery-container'),
+    );
 
     ReactDOM.render(
-      React.createElement(Similar),
+      React.createElement(Descriptions),
+      document.getElementById('item-description-container'),
+    );
+
+    ReactDOM.render(
+      React.createElement(Similar, {id: 0}, null),
       document.getElementById('similar-items-container'),
     );
 
-    // ReactDOM.render(
-    //   React.createElement(Review),
-    //   document.getElementById('item-reviews-container'),
-    // );
-    </script>
+    ReactDOM.render(
+      React.createElement(Review),
+      document.getElementById('item-reviews-container'),
+    );
+  </script>
 </body>
 </html>
