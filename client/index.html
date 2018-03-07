@@ -20,6 +20,9 @@
       <div id="image-gallery-container">IMAGES</div>
       <div id="item-description-container">ITEM DESCRIPTION</div>
     </div>
+    <div id="sponsored-title">
+      Sponsored products related to this item
+    </div>
     <div id="similar-items-container">THUMBNAILS</div>
     <div id="reviewing-container">
       <div id="item-reviews-container">REVIEWs</div>
@@ -27,10 +30,6 @@
     </div>
   </div>
   <script src="/bundle"></script>
-  <!-- <script src="/bundle/similar"></script>
-  <script src="/bundle/images"></script>
-  <script src="/bundle/reviews"></script>
-  <script src="/bundle/description"></script> -->
   <script>
     const item = Math.floor(Math.random() * 300);
     console.log('THIS IS ITEM:', item);
@@ -51,7 +50,7 @@
     );
 
     ReactDOM.render(
-      React.createElement(Review),
+      React.createElement(Review, {id: item}, null),
       document.getElementById('item-reviews-container'),
     );
   </script>
