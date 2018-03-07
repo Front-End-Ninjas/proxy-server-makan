@@ -1,21 +1,13 @@
 const express = require('express');
 const request = require('request');
+const port = require('./ports');
 
 const items = express.Router();
 
-const getPort = (url) => {
-  let port;
-  if (url.includes('similar')) {
-    port = 3000;
-  }
-  return port;
-};
-
-items.get('*', (req, res) => {
-  console.log('HERE', req.url);
-  const port = getPort(req.url);
+items.get('/:id/:service', (req, res) => {
+  const { service } = req.params;
   request({
-    url: `http://localhost:${port}/item${req.url}`,
+    url: `http://localhost:${port[service]}/item${req.url}`,
     method: 'GET',
   }).pipe(res);
 });
