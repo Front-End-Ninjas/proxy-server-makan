@@ -26,9 +26,7 @@ superbundle.get('/', (req, res) => {
       const { body, headers } = response;
       if (err) {
         console.log(err);
-      }// else {
-      //   res.send(body);
-      // }
+      }
       if (bundleTag[service] !== headers.etag) {
         promises.push(fs.writeFile(`client/bundles/${service}.js`, body, (err) => {
           bundleTag[service] = headers.etag;
