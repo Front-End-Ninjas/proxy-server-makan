@@ -1,0 +1,49 @@
+.main-proxy-container, .logo-header, .logo, #item-info-container,
+#image-gallery-container, #item-description-container,
+#similar-items-container, #item-reviews-container, 
+#reviewing-container {
+  display: flex;
+}
+
+.logo-header {
+  background-color: #232F3F;
+}
+
+.logo {
+  height: 120px;
+  width: 120px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.main-proxy-container {
+  flex-flow: column;
+}
+
+#similar-items-container, #item-reviews-container {
+  justify-content: center;
+}
+
+#item-reviews-container {
+  flex-grow: 1;
+  margin-left: 3%;
+}
+
+#spacing-container {
+  flex-grow: 2;
+}
+
+#item-info-container {
+  margin: 20px 0;
+}
+
+#image-gallery-container {
+  flex-grow: 1;
+  margin-left: 20%
+  /*width: 500px;*/
+  /*height: 450px;*/
+}
+
+#item-description-container {
+  flex-grow: 2;
+}
