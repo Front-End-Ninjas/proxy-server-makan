@@ -41,7 +41,6 @@ superbundle.get('/', (req, res) => {
   const superPath = './client/bundles/super.js';
 
   if (promises.length) {
-    console.log('KICK EVERYTHING');
     Promise.all(promises).then(() => {
       concat([similarPath, imagePath, desPath, revPath], superPath)
         .then((result) => {
@@ -50,7 +49,6 @@ superbundle.get('/', (req, res) => {
         .catch(e => res.send(e));
     });
   } else {
-    console.log('ALREADY UP TO DATE', __dirname);
     res.sendFile(path.join(__dirname, '../../client/bundles/super.js'));
   }
 });
