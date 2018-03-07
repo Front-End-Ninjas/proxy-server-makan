@@ -3,6 +3,7 @@
 <head>
   <title>Proxy Server</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css", href="style.css">
   <link rel="stylesheet" type="text/css" href="http://localhost:3001/style.css">
   <link rel="stylesheet" type="text/css" href="http://localhost:3003/style.css">
   <link rel="stylesheet" type="text/css" href="http://localhost:3000/style/styles.css">
@@ -11,27 +12,41 @@
 <body>
   <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-  <div id="item-description-container">ITEM DESCRIPTION</div>
-  <div id="image-gallery-container">IMAGES</div>
-  <div id="similar-items-container">THUMBNAILS</div>
-  <div id="item-reviews-container">REVIEWs</div>
-  <script src="http://localhost:3000/app.bundle.js"></script>
-  <script src="http://localhost:3001/dist/bundle.js"></script>
-  <script src="http://localhost:3003/bundle.js"></script>
-  <script src="http://localhost:1337/bundle.js"></script>
+  <div class="main-proxy-container">
+    <div class='logo-header'>
+      <img src="nile_logo.png" alt="nile" class="logo"/>
+    </div>
+    <div id="item-info-container">
+      <div id="image-gallery-container">IMAGES</div>
+      <div id="item-description-container">ITEM DESCRIPTION</div>
+    </div>
+    <div id="similar-items-container">THUMBNAILS</div>
+    <div id="reviewing-container">
+      <div id="item-reviews-container">REVIEWs</div>
+      <div id="spacing-container"> </div>
+    </div>
+  </div>
+  <script src="/bundle"></script>
+  <!-- <script src="/bundle/similar"></script>
+  <script src="/bundle/images"></script>
+  <script src="/bundle/reviews"></script>
+  <script src="/bundle/description"></script> -->
   <script>
+    const item = Math.floor(Math.random() * 300);
+    console.log('THIS IS ITEM:', item);
+
     ReactDOM.render(
-      React.createElement(Image),
+      React.createElement(Image, {id: item}, null),
       document.getElementById('image-gallery-container'),
     );
 
     ReactDOM.render(
-      React.createElement(Descriptions),
+      React.createElement(Descriptions, {id: item}, null),
       document.getElementById('item-description-container'),
     );
 
     ReactDOM.render(
-      React.createElement(Similar, {id: 0}, null),
+      React.createElement(Similar, {id: item}, null),
       document.getElementById('similar-items-container'),
     );
 
