@@ -1,27 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Proxy Server</title>
+  <title>Nile Proxy Server</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css", href="style.css">
-  <link rel="stylesheet" type="text/css" href="http://localhost:3001/style.css">
-  <link rel="stylesheet" type="text/css" href="http://localhost:3003/style.css">
-  <link rel="stylesheet" type="text/css" href="http://localhost:3000/style/styles.css">
-  <link rel="stylesheet" type="text/css" href="http://localhost:1337/index.css">
+  <link rel="stylesheet" type="text/css" href="http://nileproductdescription-env.zkb3gk9nqy.us-west-1.elasticbeanstalk.com/style.css">
+  <link rel="stylesheet" type="text/css" href="http://imagegallery-env.us-west-1.elasticbeanstalk.com/style.css">
+  <link rel="stylesheet" type="text/css" href="http://fec-nile-similaritems.us-west-1.elasticbeanstalk.com/style/styles.css">
+  <link rel="stylesheet" type="text/css" href="http://nilecustomerreviews-env.znsae38bc5.us-west-1.elasticbeanstalk.com/index.css">
 </head>
 <body>
   <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
   <div class="main-proxy-container">
     <div class='logo-header'>
-      <img src="nile_logo.png" alt="nile" class="logo"/>
+      <img src="https://s3-us-west-1.amazonaws.com/nile-image-assets/nile_logo.png" alt="nile" class="logo"/>
     </div>
     <div id="item-info-container">
       <div id="image-gallery-container">IMAGES</div>
       <div id="item-description-container">ITEM DESCRIPTION</div>
-    </div>
-    <div id="sponsored-title">
-      Sponsored products related to this item
     </div>
     <div id="similar-items-container">THUMBNAILS</div>
     <div id="reviewing-container">
@@ -31,28 +28,28 @@
   </div>
   <script src="/bundle"></script>
   <script>
-    const item = Math.floor(Math.random() * 300);
-    console.log('THIS IS ITEM:', item);
+const item = Math.floor(Math.random() * 300);
+console.log('THIS IS ITEM:', item);
 
-    ReactDOM.render(
-      React.createElement(Image, {id: item}, null),
-      document.getElementById('image-gallery-container'),
-    );
+ReactDOM.render(
+  React.createElement(imageGallery, { id: item }, null),
+  document.getElementById('image-gallery-container'),
+);
 
-    ReactDOM.render(
-      React.createElement(Descriptions, {id: item}, null),
-      document.getElementById('item-description-container'),
-    );
+ReactDOM.render(
+  React.createElement(IndexDesc, { id: item }, null),
+  document.getElementById('item-description-container'),
+);
 
-    ReactDOM.render(
-      React.createElement(Similar, {id: item}, null),
-      document.getElementById('similar-items-container'),
-    );
+ReactDOM.render(
+  React.createElement(Similar, { id: item }, null),
+  document.getElementById('similar-items-container'),
+);
 
-    ReactDOM.render(
-      React.createElement(Review, {id: item}, null),
-      document.getElementById('item-reviews-container'),
-    );
+ReactDOM.render(
+  React.createElement(Review, { id: item }, null),
+  document.getElementById('item-reviews-container'),
+);
   </script>
 </body>
 </html>

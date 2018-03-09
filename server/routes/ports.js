@@ -1,6 +1,6 @@
 module.exports = {
-  images: 3003,
-  similar: 3000,
-  reviews: 1337,
-  description: 3001,
+  images: 'http://imagegallery-env.us-west-1.elasticbeanstalk.com',
+  similar: 'http://fec-nile-similaritems.us-west-1.elasticbeanstalk.com',
+  reviews: 'http://nilecustomerreviews-env.znsae38bc5.us-west-1.elasticbeanstalk.com',
+  description: 'http://nileproductdescription-env.zkb3gk9nqy.us-west-1.elasticbeanstalk.com',
 };

@@ -1,6 +1,6 @@
 module.exports = {
-  similar: '3000/app.bundle.js',
-  images: '3003/bundle.js',
-  reviews: '1337/bundle.js',
-  description: '3001/dist/bundle.js',  
+  similar: 'http://fec-nile-similaritems.us-west-1.elasticbeanstalk.com/app.bundle.js',
+  images: 'http://imagegallery-env.us-west-1.elasticbeanstalk.com/bundle.js',
+  reviews: 'http://nilecustomerreviews-env.znsae38bc5.us-west-1.elasticbeanstalk.com/bundle.js',
+  description: 'http://nileproductdescription-env.zkb3gk9nqy.us-west-1.elasticbeanstalk.com/dist/bundle.js',
 };
