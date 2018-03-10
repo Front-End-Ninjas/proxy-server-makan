@@ -1,63 +1,75 @@
 const express = require('express');
-const Promise = require('bluebird');
+const concat = require('concat');
+const redis = require('redis');
 const path = require('path');
+const Promise = require('bluebird');
 const request = Promise.promisifyAll(require('request'));
 const fs = Promise.promisifyAll(require('fs'));
-const concat = require('concat');
-const bundlePath = require('./bundlePaths/bundlePaths');
+const { serviceBundlePaths, bundleTagCache } = require('./pathAndCacheVariables');
+
+const redisClient = redis.createClient();
 
 const superbundle = express.Router();
 
-const bundleTag = {
-  similar: null,
-  reviews: null,
-  description: null,
-  images: null,
+const BUNDLE_FOLDER = path.join(__dirname, '../../client/bundles/');
+
+const getBundle = url => request.getAsync({
+  url,
+  method: 'GET',
+});
+
+const writeBundle = (fileName, body) => fs.writeFileAsync(`${BUNDLE_FOLDER}${fileName}.js`, body);
+
+const getBundleAndWrite = (url, service) => getBundle(url)
+  .then((response) => {
+    const { body, headers } = response;
+    if (bundleTagCache[service] !== headers.etag) {
+      return writeBundle(service, body)
+        .then(() => {
+          bundleTagCache[service] = headers.etag;
+          return headers.etag;
+        })
+        .catch(e => console.log('Bundle failed to write', e)); // add npm log
+    }
+    return undefined;
+  });
+
+const getAllBundles = services => Promise.map(services, service =>
+  getBundleAndWrite(serviceBundlePaths[service], service));
+
+const buildBundle = services => getAllBundles(services)
+  .then((result) => {
+    if (result.some(tag => tag)) {
+      const filePaths = services.map(fileName => `${BUNDLE_FOLDER}${fileName}.js`);
+
+      return concat(filePaths, `${BUNDLE_FOLDER}super.js`)
+        .then((bundle) => {
+          redisClient.setex('bundle', 3600, bundle);
+        });
+    }
+    return undefined;
+  });
+
+const buildAndSendBundle = (req, res) => {
+  const services = Object.keys(bundleTagCache);
+  buildBundle(services)
+    .then(() => res.sendFile(`${BUNDLE_FOLDER}super.js`))
+    .catch(e => res.send(e));
 };
 
-superbundle.get('/', (req, res) => {
-  const services = Object.keys(bundleTag);
-  const files = [];
+const checkCache = (req, res, next) => {
+  redisClient.get('bundle', (err, data) => {
+    if (err) {
+      console.log('Failed to get from Redis', err);
+      next();
+    } else if (data != null) {
+      res.send(data);
+    } else {
+      next();
+    }
+  });
+};
 
-  const promises = Promise.map(services, service =>
-    request.getAsync({
-      url: bundlePath[service],
-      method: 'GET',
-    }).then((response) => {
-      const { body, headers } = response;
-      if (bundleTag[service] !== headers.etag) {
-        files.push(fs.writeFileAsync(`client/bundles/${service}.js`, body)
-          .then(() => {
-            bundleTag[service] = headers.etag;
-          })
-          .catch(e => console.log(e)));
-      }
-    }).catch(e => console.log(e)));
-
-  const similarPath = './client/bundles/similar.js';
-  const imagePath = './client/bundles/images.js';
-  const desPath = './client/bundles/description.js';
-  const revPath = './client/bundles/reviews.js';
-  const superPath = './client/bundles/super.js';
-
-  Promise.all(promises)
-    .then(() => {
-      Promise.all(files)
-        .then(() => {
-          if (files.length) {
-            concat([similarPath, imagePath, desPath, revPath], superPath)
-              .then((result) => {
-                console.log(result);
-                res.send(result);
-              })
-              .catch(e => res.send(e));
-          } else {
-            res.sendFile(path.join(__dirname, '../../client/bundles/super.js'));
-          }
-        })
-        .catch(e => console.log(e));
-    })
-    .catch(e => console.log(e));
-});
+superbundle.get('/', checkCache, buildAndSendBundle);
 
 module.exports = superbundle;
