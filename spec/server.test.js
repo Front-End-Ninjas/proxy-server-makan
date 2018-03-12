@@ -15,7 +15,11 @@ jest.mock('../server/helpers/serviceBundleHandler');
 jest.mock('../server/app');
 // describe root path
 describe('## SERVER PATHS ##', () => {
-  afterAll(() => redisClient.quit());
+  afterAll(() => {
+    console.log('HERE');
+    redisClient.quit();
+  });
+
   describe('Testing the root path', () =>
     it('Should respond to a GET', () =>
       request(app).get('/').then(response =>
@@ -52,7 +56,10 @@ describe('## SUPER BUNDLE HELPERS ##', () => {
     writeBundle.mockClear();
   });
 
-  afterAll(() => redisClient.quit());
+  afterAll(() => {
+    console.log('HERE');
+    redisClient.quit();
+  });
 
   describe('Testing the getAllBundles method', () => {
     it('Should call getBundle and writeBundle once', () => {
