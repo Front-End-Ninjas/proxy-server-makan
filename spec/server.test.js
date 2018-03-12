@@ -90,10 +90,9 @@ describe('## SUPER BUNDLE HELPERS ##', () => {
           expect(writeBundle).not.toHaveBeenCalled();
           expect(result).toBeInstanceOf(Array);
           expect(result).toEqual(expect.arrayContaining(expected));
+          redisClient.quit();
         })
         .catch(e => console.log(e));
     });
   });
 });
-
-redisClient.quit();
