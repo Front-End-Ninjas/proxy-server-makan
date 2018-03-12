@@ -33,7 +33,7 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
         
-      - run: redis-server
+      - run: npm run red
       
       # run tests!
       - run: npm test
