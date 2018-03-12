@@ -1,5 +1,6 @@
 const request = require('supertest');
 const concat = require('concat');
+const redis = require('redis');
 const app = require('../server/app');
 const { getBundle, writeBundle } = require('../server/helpers/serviceBundleHandler');
 const {
@@ -7,6 +8,8 @@ const {
   getAllBundles,
 } = require('../server/helpers/superBundleHandler');
 const { bundleTagCache } = require('../server/routes/pathCacheVariables');
+
+const redisClient = redis.createClient();
 
 jest.mock('../server/helpers/serviceBundleHandler');
 jest.mock('../server/app');
@@ -47,6 +50,8 @@ describe('## SUPER BUNDLE HELPERS ##', () => {
     getBundle.mockClear();
     writeBundle.mockClear();
   });
+
+  afterAll(() => redisClient.quit());
 
   describe('Testing the getAllBundles method', () => {
     it('Should call getBundle and writeBundle once', () => {
