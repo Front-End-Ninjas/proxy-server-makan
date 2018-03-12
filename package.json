@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "serve": "node server/server.js",
-    "serve-dev": "nodemon server/server.js"
+    "serve-dev": "nodemon server/server.js",
+    "red": "redis-server"
   },
   "repository": {
     "type": "git",
