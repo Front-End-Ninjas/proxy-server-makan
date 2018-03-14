@@ -5,7 +5,7 @@ const checkCache = (req, res, next) => {
     if (err) {
       console.log('Failed to get from Redis', err);
       next();
-    } else if (data != null) {
+    } else if (data !== null) {
       res.send(data);
     } else {
       next();
