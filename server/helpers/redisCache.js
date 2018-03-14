@@ -1,6 +1,4 @@
-const redis = require('redis');
-
-const redisClient = redis.createClient();
+const redisClient = require('./redisClient');
 
 const checkCache = (req, res, next) => {
   redisClient.get('bundle', (err, data) => {

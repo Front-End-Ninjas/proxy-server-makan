@@ -1,11 +1,10 @@
 const concat = require('concat');
-const redis = require('redis');
+const redisClient = require('./redisClient');
 const path = require('path');
 const Promise = require('bluebird');
 const { serviceBundlePaths, bundleTagCache } = require('../routes/pathCacheVariables');
 const { getBundle, writeBundle } = require('./serviceBundleHandler');
 
-const redisClient = redis.createClient();
 const BUNDLE_FOLDER = path.join(__dirname, '../../client/bundles/');
 
 const getBundleAndWrite = (url, service) => getBundle(url)
