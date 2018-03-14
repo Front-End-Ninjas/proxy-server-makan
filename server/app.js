@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const items = require('./routes/items');
-const superbundle = require('./routes/bun');
+const superbundle = require('./routes/superBundle');
 
 const app = express();
 

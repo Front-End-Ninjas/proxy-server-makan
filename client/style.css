@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
 tr, .main-proxy-container, .logo-header, .logo, #item-info-container,
 #image-gallery-container, #item-description-container,
 #similar-items-container, #item-reviews-container, 
@@ -6,8 +8,21 @@ tr, .main-proxy-container, .logo-header, .logo, #item-info-container,
   display: flex;
 }
 
+body {
+  font-family: 'Lato' !important;
+}
+
 tr {
   align-items: center;
+}
+
+#star {
+  flex-grow: 1;
+}
+
+#reviewTitle {
+  flex-grow: 2;
+  padding-left: 2%;
 }
 
 #tbody {
